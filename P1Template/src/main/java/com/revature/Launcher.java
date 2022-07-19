@@ -1,5 +1,7 @@
 package com.revature;
 
+import io.javalin.Javalin;
+
 public class Launcher {
 
 	public static void main(String[] args) {
@@ -21,7 +23,17 @@ public class Launcher {
 //          (___()'`;
 //          /,    /`
 //          \\"--\\
+//CREATE a javalin object 
+		Javalin app = Javalin.create(
+				
+				//the config lambda 
+				config -> {
+					config.enableCorsForAllOrigins(); //this lets us process HTTP requests from any origin
+				}
+				
+				).start(4000); // port 4000 where requests are sent to.
 		
 	}
+	
 	
 }
