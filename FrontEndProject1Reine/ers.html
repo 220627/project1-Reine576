@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Reimbursement System (ERS)</title>
+    <!-- CSS only (THIS IS OUR BOOTSTRAP CDN FOR QUICK/EASY STYLING)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+    crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+
+        <h2 class=“.text-center”>Welcome to Employee Reimbursement System (ERS)</h2>  <!-- Centralize it + add colour + BOLD + CLIGNOTER-->
+
+
+        <br><br>
+
+        <div id="loginRow">
+            <h4 id="welcomeHead">Please enter your Login Credentials:</h4>
+            <input type="text" id="username">
+            <input type="text" id="password">
+            <button id="loginButton" class="btn col-sm-1 btn-warning">Login</button>
+
+        </div>
+
+
+
+
+
+        <!-- div generated with: div#table-row.row -->
+        <!-- This class name is for bootstrap, it will be styled as a bootstrap row-->
+        <div id="table-row" class="row">
+
+            <table class="table table-dark table bordered table-hover table-striped">
+                <thead>
+                    <tr>                    <!--  DO THEY HAVE TO BE IN THE SAME ORDER AS IN THE DATABASE TABLE ???????-->
+                    <th>Reimbursement ID</th>
+                    <th>Amount</th>
+                    <th>Submission Date</th>
+                    <th>Author</th>
+                    <th>Status ID</th>  <!-- I prefer the "STATUS" itself be written NOT ID-->
+                    <th>Type ID</th>    <!-- I prefer the "TYPE" itself be written  NOT ID-->
+                    <th></th>
+                        
+                    </tr>
+
+
+                </thead>
+
+
+
+            </table>
+
+
+
+        </div>
+
+
+
+    </div>
+    
+  <div class="swiper-container__content">
+    <div class="container">
+          <div class="cf-media-box is-text-center is-text-horizontal-position-center is-text-vertical-position-middle is-mobile-text-center is-text-width-full" data-mobile-text-horizontal-class="is-mobile-text-horizontal-position-center" data-mobile-text-vertical-class="is-mobile-text-vertical-position-middle" data-mobile-text-align-class="is-mobile-text-center">
+
+        <div class="cf-media-box__body is-text-center">
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+      
+</body>
+</html>
