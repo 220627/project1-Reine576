@@ -41,7 +41,8 @@ public class Ers_ReimbursementController {
 			//use the GSON .toJson() method to turn our Java into JSON String (JSON is always in String format on the Java side)
 			String JSONreimbursements = gson.toJson(reimbursements);//reimbursements is the ArrayList of our reimbursement data
 			
-			log.info("User got all reimbursements!");  //line in relation to logging
+			log.info("User was able to view all reimbursements!");  //line in relation to logging
+			
 			
 			//use ctx to provide an HTTP response containing our JSON string of reimbursements (which is what was requested)
 			ctx.result(JSONreimbursements);//ctx.result() sends a response back (this is where our data goes)
@@ -50,8 +51,11 @@ public class Ers_ReimbursementController {
 			           System.out.println(" I'm doing well ?????");
 				
 		}else {//if the user is NOT logged in (aka AuthController.ses wil be null)
+			
+			log.info("Finance Manager could not view all reimbursements!");  //line in relation to logging
 			ctx.result("YOU ARE NOT LOGGED IN!");
 			ctx.status(401); //"forbidden" access code
+			
 			
 		}
 		
@@ -79,11 +83,14 @@ public class Ers_ReimbursementController {
 			
 			if(rDAO.insertReimbursements(newReimb)) {
 				
+				log.info("User successfully inserted the reimbursement!");  //line in relation to logging
 				//return a successful status code
-				ctx.status(202);//202 stands for "accepted"		
+				ctx.status(202);//202 stands for "accepted"	
+				
 			
 		}else {
-			ctx.status(406);//406 stands for "Not Acceptable", AKA whatever the user sent couldn't be added to the DB
+			log.info("User was unable to insert the reimbursement!");  //line in relation to logging
+			ctx.status(406);//406 stands for "Not Acceptable", AKA whatever the user sent couldn't be added to the DB			
 			
 		}
 		
@@ -103,9 +110,15 @@ public class Ers_ReimbursementController {
 					
 					//if the update DAO method returns true (which means successful)..
 					if(rDAO.updateStatusOfReimbursements(status_id, reimbursementStatus)) {
-						ctx.status(202);
+						
+						log.info("Finance Manager successfully updated reimbursements!");  //line in relation to logging
+						
+						ctx.status(202);						
+						
 					}else {
+						log.info("Finance Manager was unable to update the reimbursement(s)!");  //line in relation to logging
 						ctx.status(406);
+						
 					}
 					
 					//you're not getting a reimb_id anywhere. you should send it in your request body and call it in your controller using ctx.body()
@@ -133,14 +146,17 @@ public class Ers_ReimbursementController {
 					//use the GSON .toJson() method to turn our Java into JSON String (JSON is always in String format on the Java side)
 					String JSONreimbursements = gson.toJson(reimbursements); //reimbursement is the ArrayList of our reimbursement data
 					
-					//use ctx to provide an HTTP response containing our JSON string of reimbursements (which is what was requested)
+					log.info("User was able to view all their reimbursement(s)!");  //line in relation to logging
 					
+					//use ctx to provide an HTTP response containing our JSON string of reimbursements (which is what was requested)					
 					ctx.result(JSONreimbursements);//ctx.result() sends a response back (this is where our data goes)
 					
 					ctx.status(200);//ctx.status() sets the HTTP status code. 200 stands for "OK", the generic success code.
 					
 										
 				}else {//if the user is NOT logged in (aka AuthController.ses will be null)
+					log.info("User was unable to view all their reimbursement(s)!");  //line in relation to logging
+					
 					ctx.result("YOU ARE NOT LOGGED IN!!");
 					ctx.status(401); //"forbidden" access code							  
 					
@@ -170,6 +186,8 @@ public class Ers_ReimbursementController {
 						//use the GSON .toJson() method to turn our Java into JSON String (JSON is always in String format on the Java side)
 						String JSONreimbursements = gson.toJson(reimbursements);//reimbursement is the ArrayList of our reimbursement data
 						
+						log.info("Finance Manager has been able to view all reimbursements by users' Reimbursement Status!");  //line in relation to logging
+						
 						//use ctx to provide an HTTP response containing our JSON string of employees (which is what was requested)
 						ctx.result(JSONreimbursements);//ctx.result() sends a response back (this is where our data goes)
 						
@@ -178,6 +196,7 @@ public class Ers_ReimbursementController {
 					}else {//if the user is NOT logged in (aka AuthController.ses wil be null)
 						ctx.result("YOU ARE NOT LOGGED IN!!");
 						ctx.status(401);//"forbidden" access code
+						log.info("Finance Manager has not been able to view all reimbursements by users' Reimbursement Status!");  //line in relation to logging
 						
 					}
 				};

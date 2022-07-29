@@ -2,6 +2,9 @@ package Controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.revature.models.Ers_Users;
 import com.revature.models.LoginDTO;
@@ -12,6 +15,7 @@ import io.javalin.http.Handler;
 
 public class AuthController {
 	
+	public static Logger log = LogManager.getLogger(); //for the log. Import the apache log...
 	//we need an AuthService, remember the Service layer sits between the Controllers and DAOs
 	AuthService as = new AuthService();
 	
@@ -41,11 +45,14 @@ public class AuthController {
 			
 			String userJSON = gson.toJson(user); //turn the returned User into JSON
 			
+			log.info("User was able to login!");  //line in relation to logging
+			
 			ctx.result(userJSON); //send the user to the front end
 			
 			ctx.status(202);   //202 stands for "accepted"
 			
 		}else {
+			log.info("User was unable to login!");  //line in relation to logging
 			//log that the user failed to log in
 			//log.warn("User Failed to Login!"); Add this when I add log
 			
