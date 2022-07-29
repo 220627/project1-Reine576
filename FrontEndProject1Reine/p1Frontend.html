@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Reimbursement System (ERS)</title>
+    <!-- CSS only (THIS IS OUR BOOTSTRAP CDN FOR QUICK/EASY STYLING)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+    crossorigin="anonymous">
+    <!-- This is how we can link to our external stylesheet (considered best practice for styling HTML)-->
+    <link rel="stylesheet" href="p1Frontend.css">
+
+</head>
+<body>
+
+    <div class="container">
+
+        <h2 class=“.text-center” style="color: blue ;">Welcome to Employee Reimbursement System (ERS)</h2>  <!-- Centralize it + add colour + BOLD + CLIGNOTER-->
+
+
+        <br><br>
+
+        <div id="loginRow">
+            <h4 id="welcomeHead">Please enter your Login Credentials:</h4>
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="password" placeholder="Password">
+            <button id="loginButton" class="btn col-sm-1 btn-warning">Login</button>
+
+        </div>
+        <br><br>
+
+
+        <!-- div generated with: div#table-row.row -->
+        <!-- This class name is for bootstrap, it will be styled as a bootstrap row-->
+        <div id="table-row" class="row">
+
+            <table class="table table-dark table bordered table-hover table-striped"> <!-- Get All REIMB TABLE!-->
+                <thead>
+                    <tr>                    <!--  DO THEY HAVE TO BE IN THE SAME ORDER AS IN THE DATABASE TABLE ???????-->
+                    <th>Reimbursement ID</th>
+                    <th>Amount</th>
+                    <th>Submission Date</th>
+                    <th>Author</th>
+                    <th>Status ID</th>  <!-- I prefer the "STATUS" itself be written NOT ID-->
+                    <th>Type ID</th>    <!-- I prefer the "TYPE" itself be written  NOT ID-->
+                    <th></th>
+                        
+                    </tr>
+
+                </thead>
+                <tbody id="reimbursementBody">
+
+                    <!-- We'll leave this blank for now - it will be filled with data by our JS -->
+
+                </tbody>
+
+            </table>
+            
+
+        </div>
+           <!-- Am I to do it outside the above div??????????????///-->
+    <button id="getReimbursementButton" class="btn btn-success">View Reimbursements</button>    
+    
+    <br><br>
+    
+    <div>
+    <!-- Check I'm trying to add PLACEHOLDER ????????-->
+    <input id="statusInput" type="number" placeholder="1:submitted;2:pending;3:approved"> 
+    <button id="getReimbursementByStatusButton" class="btn btn-success">View Reimbursements by Status</button>
+      
+
+
+
+
+    
+
+    <div>
+        <h4 id="updateHeader">Enter Reimbursement ID and New Status:</h4> <!-- DELICATE BE DOUBLE SURE !!!!-->
+        <input type="text" id="reimbursementId" placeholder="Reimbursement ID">
+        <input type="text" id="status" placeholder="New Status">
+
+    </div>
+    <br>
+    <button id="updateButton" class="btn btn-success">Update Reimbursement Status</button>
+
+    </div> 
+    <br><br>
+    
+            <div>
+            <input id="userIdInput" type="number" placeholder="User Id">
+            <button id="getReimbursementsByUserButton" class="btn btn-primary" >View Reimbursements by User Id</button>
+            </div>
+
+            <div>
+                <h4 id="insertHeader">Insert New Reimbursement:</h4>
+                <input id="typeInput" type="text" placeholder="Reimb Type">
+                <input id="amountInput" type="number" placeholder="Amount">
+                <button id="insertReimbursementButton" class="btn btn-primary" >Insert New Reimbursement:</button>
+                </div>
+    
+
+    
+
+
+    <!-- I was testing something else below-->
+  <div class="swiper-container__content">
+    <div class="container">
+          <div class="cf-media-box is-text-center is-text-horizontal-position-center is-text-vertical-position-middle is-mobile-text-center is-text-width-full" data-mobile-text-horizontal-class="is-mobile-text-horizontal-position-center" data-mobile-text-vertical-class="is-mobile-text-vertical-position-middle" data-mobile-text-align-class="is-mobile-text-center">
+
+        <div class="cf-media-box__body is-text-center">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <script src="p1Frontend.js"></script>
+      
+</body>
+</html>

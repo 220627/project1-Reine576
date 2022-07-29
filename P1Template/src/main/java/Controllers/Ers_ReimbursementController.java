@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.revature.daos.Ers_ReimbursementDAO;
+import com.revature.daos.Ers_UsersDAO;
 import com.revature.models.Ers_Reimbursement;
 
 import io.javalin.http.Handler;
@@ -24,13 +25,14 @@ public class Ers_ReimbursementController {
 	Ers_ReimbursementDAO rDAO = new Ers_ReimbursementDAO();
 	
 	
+	
 	//This Handler will get the HTTP GET Request for all reimbursements (used by Finance Man), ?????????????????????????///
 	//then it will collect the data and send it back in an HTTP Response
 	public Handler getReimbursementHandler = (ctx) ->{
 		// ctx is the Context object! 
 		//This object contains a bunch of method that we can use to take in HTTP Requests and send HTTP Responses
 		
-		if(AuthController.ses != null) { //if the user is logged in, they can access this functionality
+		if(AuthController.ses != null && Ers_UsersDAO.current.getUser_role_id_fk() == 2) { //if the user is logged in, they can access this functionality
 			
 			//We need an ArrayList of Reimbursements, courtesy of our Ers_ReimbursementDAO
 			ArrayList<Ers_Reimbursement> reimbursements = rDAO.getReimbursements();
@@ -100,6 +102,7 @@ public class Ers_ReimbursementController {
 				//this Handler will get the HTTP PUT request to update a Reimbursement Status.
 				public Handler updateReimbursementStatusHandler = (ctx) ->{
 					
+					if(AuthController.ses != null && Ers_UsersDAO.current.getUser_role_id_fk() == 2) {
 					//String to hold the status title (which comes in as a PATH PARAMETER)
 					int status_id = Integer.parseInt(ctx.pathParam("status_id"));//pathParam() gives us the value the user sends in as a path parameter
 					//in this case, our Launcher endpoint handler calls it "status", so this is what we need to call here
@@ -120,6 +123,11 @@ public class Ers_ReimbursementController {
 						ctx.status(406);
 						
 					}
+					}else {
+						System.out.println("You are not authorized");
+						ctx.status(401);
+						
+					}
 					
 					//you're not getting a reimb_id anywhere. you should send it in your request body and call it in your controller using ctx.body()
 					//you can see something very similar in my P1Demo
@@ -134,8 +142,9 @@ public class Ers_ReimbursementController {
 					
 					
 					//ctx is the Context object that contains a bunch of methods that we can use to take in HTTP Requests and send HTTP Responses
-					if(AuthController.ses != null) {//if the user is logged in, they can access this functionality
-						int user_id = Integer.parseInt(ctx.pathParam("user_id"));//pathParam() gives us the value the user sends in as a path parameter
+					
+					int user_id = Integer.parseInt(ctx.pathParam("user_id"));//pathParam() gives us the value the user sends in as a path parameter
+					if(AuthController.ses != null && (Ers_UsersDAO.current.getUser_role_id_fk() == 2 || Ers_UsersDAO.current.getErs_users_id() == user_id )) {//if the user is logged in, they can access this functionality
 						
 					//We need an ArrayList of Reimbursements	
 					ArrayList<Ers_Reimbursement> reimbursements = rDAO.getReimbursementsByUserId(user_id);
@@ -174,7 +183,7 @@ public class Ers_ReimbursementController {
 					//what is ctx? it's the Context object! 
 					//This object contains a bunch of method that we can use to take in HTTP Requests and send HTTP Responses
 					
-					if(AuthController.ses != null) {//if the user is logged in, they can access this functionality
+					if(AuthController.ses != null && Ers_UsersDAO.current.getUser_role_id_fk() == 2) {//if the user is logged in, they can access this functionality
 						int reimb_status = Integer.parseInt(ctx.pathParam("reimb_status"));//pathParam() gives us the value the user sends in as a path parameter
 						
 						//We need an ArrayList of Ers_Reimbursement, courtesy of our Ers_ReimbursementDAO

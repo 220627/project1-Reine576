@@ -9,6 +9,7 @@ import com.revature.models.Ers_Users;
 import com.revature.utils.ConnectionUtil;
 
 public class Ers_UsersDAO {
+	public static Ers_Users current;
 	
 	public Ers_Users login(String ers_username, String ers_password) {
 		
@@ -27,7 +28,7 @@ public class Ers_UsersDAO {
 			if(rs.next()) {
 				//return true; removed it bc of public User(this changed from boolean to User) login(String username, String password) {
                 //*
-				Ers_Users u = new Ers_Users(
+				current = new Ers_Users(
 					rs.getInt("ers_users_id"),
 				    rs.getString("ers_username"),
 				    rs.getString("ers_password"),
@@ -36,7 +37,7 @@ public class Ers_UsersDAO {
 				    rs.getString("user_email"),
 				    rs.getInt("user_role_id_fk")
 				    );
-				return u;
+				return current;
 				//notice we're returning a password here... probably not best practice lol
 				//in a REAL application, you'd probably want a User constructor with no password and send that around instead.
 				}
